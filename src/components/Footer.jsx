@@ -36,6 +36,23 @@ const Footer = memo(function Footer() {
             WhatsApp-first retail operating system for small Indian retailers.
             Manage inventory, billing, and analytics — in your language.
           </p>
+          <div style={{ marginTop: 16, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ color: '#475569', fontSize: '0.75rem' }}>A product of</span>
+            <span
+              style={{
+                color: '#94a3b8',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                padding: '2px 8px',
+                borderRadius: 999,
+              }}
+            >
+              Ports
+            </span>
+          </div>
         </div>
 
         {/* Quick Links */}
@@ -150,8 +167,10 @@ const Footer = memo(function Footer() {
           textAlign: 'center',
         }}
       >
-        <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
-          Built for Bharat 🇮🇳
+        <p style={{ color: '#64748b', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+          <span>Built for Bharat 🇮🇳</span>
+          <span style={{ color: '#334155' }}>·</span>
+          <span style={{ color: '#475569' }}>A <span style={{ color: '#64748b', fontWeight: 600 }}>Ports</span> product</span>
         </p>
       </div>
     </footer>

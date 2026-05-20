@@ -151,7 +151,7 @@ const Footer = memo(function Footer() {
         }}
       >
         <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
-          © {new Date().getFullYear()} Karobaar. All rights reserved.
+          Built for Bharat 🇮🇳
         </p>
       </div>
     </footer>

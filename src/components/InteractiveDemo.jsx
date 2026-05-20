@@ -59,9 +59,11 @@ const InteractiveDemo = memo(function InteractiveDemo() {
   const [activeCommand, setActiveCommand] = useState(null)
   const chatEndRef = useRef(null)
 
-  // Scroll to bottom of chat
+  // Scroll to bottom of chat only when a message is added or typing changes, but not on initial mount
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messages.length > 1 || isTyping) {
+      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
   }, [messages, isTyping])
 
   const handleCommandClick = (cmd) => {

@@ -59,6 +59,19 @@ const InteractiveDemo = memo(function InteractiveDemo() {
   const [activeCommand, setActiveCommand] = useState(null)
   const isMounted = useRef(false)
   const chatBodyRef = useRef(null)
+  const [statusBarTime, setStatusBarTime] = useState('')
+  const [statusBarDate, setStatusBarDate] = useState('')
+
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date()
+      setStatusBarTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
+      setStatusBarDate(now.toLocaleDateString([], { day: 'numeric', month: 'short' }))
+    }
+    updateDateTime()
+    const timer = setInterval(updateDateTime, 30000)
+    return () => clearInterval(timer)
+  }, [])
 
   // Scroll to bottom of chat panel container only when messages or typing states update (not on initial mount)
   useEffect(() => {
@@ -194,14 +207,58 @@ const InteractiveDemo = memo(function InteractiveDemo() {
               position: 'relative',
             }}
           >
-            {/* Phone Notch/Speaker */}
-            <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: 100, height: 18, background: '#1e293b', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, zIndex: 10 }} />
+            {/* iPhone Dynamic Display Status Bar */}
+            <div
+              style={{
+                height: 38,
+                background: '#075E54',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 20px 0 20px',
+                position: 'relative',
+                zIndex: 10,
+                color: 'white',
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                fontSize: '12px',
+                fontWeight: '600',
+                letterSpacing: '-0.02em',
+                userSelect: 'none',
+              }}
+            >
+              {/* Time */}
+              <div style={{ width: 60, textAlign: 'left' }}>{statusBarTime}</div>
+
+              {/* Dynamic Island */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: 8,
+                  transform: 'translateX(-50%)',
+                  width: 80,
+                  height: 22,
+                  background: '#000000',
+                  borderRadius: 999,
+                  boxShadow: 'inset 0 0 1px rgba(255,255,255,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#111827', marginLeft: -40, opacity: 0.4 }} />
+                <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#1e3a8a', marginLeft: 4, opacity: 0.3 }} />
+              </div>
+
+              {/* Date */}
+              <div style={{ width: 60, textAlign: 'right', fontSize: '11px', whiteSpace: 'nowrap' }}>{statusBarDate}</div>
+            </div>
 
             {/* Chat App Header */}
             <div
               style={{
                 background: '#075E54',
-                padding: '24px 16px 12px',
+                padding: '10px 16px 12px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,

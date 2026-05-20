@@ -8,7 +8,6 @@ const navLinks = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About' },
   { path: '/demo', label: 'Demo' },
-  { path: '/contact', label: 'Contact' },
 ]
 
 const Navbar = memo(function Navbar() {

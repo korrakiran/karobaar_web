@@ -58,12 +58,15 @@ const InteractiveDemo = memo(function InteractiveDemo() {
   const [isTyping, setIsTyping] = useState(false)
   const [activeCommand, setActiveCommand] = useState(null)
   const isMounted = useRef(false)
-  const chatEndRef = useRef(null)
+  const chatBodyRef = useRef(null)
 
-  // Scroll to bottom of chat only when a message is added or typing changes, but not on initial mount
+  // Scroll to bottom of chat panel container only when messages or typing states update (not on initial mount)
   useEffect(() => {
-    if (isMounted.current) {
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (isMounted.current && chatBodyRef.current) {
+      chatBodyRef.current.scrollTo({
+        top: chatBodyRef.current.scrollHeight,
+        behavior: 'smooth'
+      })
     } else {
       isMounted.current = true
     }
@@ -230,6 +233,7 @@ const InteractiveDemo = memo(function InteractiveDemo() {
 
             {/* Chat Messages Panel */}
             <div
+              ref={chatBodyRef}
               style={{
                 flexGrow: 1,
                 background: '#ECE5DD',
@@ -324,7 +328,6 @@ const InteractiveDemo = memo(function InteractiveDemo() {
                   </motion.div>
                 )}
               </AnimatePresence>
-              <div ref={chatEndRef} />
             </div>
 
             {/* Input Bar Footer */}

@@ -44,7 +44,7 @@ const team = [
     bio: 'Passionate about leveraging machine learning and conversational AI to solve real-world problems and digitalize retail.',
     image: kiranImg,
     linkedin: 'https://www.linkedin.com/in/korra-kiran-482998286/',
-    email: 'kiran@ports.blog',
+    email: 'kirankorra831@gmail.com',
   },
   {
     name: 'Abdullah Aarif Shaikh',
@@ -52,7 +52,7 @@ const team = [
     bio: 'Curious coder and optimist focused on building optimized technological and financial systems for commerce.',
     image: abdullahImg,
     linkedin: 'https://www.linkedin.com/in/abdullah-aarif-shaikh-0b248b227/',
-    email: 'abdullah@ports.blog',
+    email: 'abdullahaarif3@gmail.com',
   },
   {
     name: 'Md. Mubashir Ahmed',
@@ -60,7 +60,7 @@ const team = [
     bio: 'Experienced in AI/ML solutions and community outreach, focused on scaling tech platforms for local merchants.',
     image: mubashirImg,
     linkedin: 'https://www.linkedin.com/in/md-mubashir-ahmed-00511728b/',
-    email: 'mubashir@ports.blog',
+    email: 'mubashir18305@gmail.com',
   },
 ]
 

@@ -52,7 +52,7 @@ const Footer = memo(function Footer() {
             Quick Links
           </h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {['/', '/about', '/contact'].map((path) => (
+            {['/', '/about', '/demo', '/contact'].map((path) => (
               <Link
                 key={path}
                 to={path}

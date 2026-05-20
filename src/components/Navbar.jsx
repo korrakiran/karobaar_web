@@ -106,13 +106,15 @@ const Navbar = memo(function Navbar() {
 
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Link
-              to="/contact"
-              className="hidden md:inline-flex btn-primary"
-              style={{ padding: '10px 24px', fontSize: '0.875rem' }}
-            >
-              Contact Us <ArrowRight size={16} />
-            </Link>
+            <div className="hidden md:block">
+              <Link
+                to="/contact"
+                className="btn-primary"
+                style={{ padding: '10px 24px', fontSize: '0.875rem' }}
+              >
+                Contact Us <ArrowRight size={16} />
+              </Link>
+            </div>
             <button
               className="md:hidden flex items-center justify-center"
               onClick={() => setMenuOpen(!menuOpen)}

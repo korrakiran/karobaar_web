@@ -38,7 +38,10 @@ const Footer = memo(function Footer() {
           </p>
           <div style={{ marginTop: 16, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <span style={{ color: '#475569', fontSize: '0.75rem' }}>A product of</span>
-            <span
+            <a
+              href="https://ports.blog"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 color: '#94a3b8',
                 fontSize: '0.75rem',
@@ -48,10 +51,14 @@ const Footer = memo(function Footer() {
                 border: '1px solid rgba(255,255,255,0.08)',
                 padding: '2px 8px',
                 borderRadius: 999,
+                textDecoration: 'none',
+                transition: 'color 0.2s, border-color 0.2s',
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#00C16A'; e.currentTarget.style.borderColor = 'rgba(0,193,106,0.3)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
             >
-              Ports
-            </span>
+              ports.blog
+            </a>
           </div>
         </div>
 
@@ -170,7 +177,18 @@ const Footer = memo(function Footer() {
         <p style={{ color: '#64748b', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
           <span>Built for Bharat 🇮🇳</span>
           <span style={{ color: '#334155' }}>·</span>
-          <span style={{ color: '#475569' }}>A <span style={{ color: '#64748b', fontWeight: 600 }}>Ports</span> product</span>
+          <span style={{ color: '#475569' }}>A{' '}
+            <a
+              href="https://ports.blog"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#64748b', fontWeight: 600, textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#00C16A')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#64748b')}
+            >
+              ports.blog
+            </a>{' '}product
+          </span>
         </p>
       </div>
     </footer>

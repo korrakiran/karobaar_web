@@ -121,7 +121,7 @@ const Contact = memo(function Contact() {
         </AnimatedSection>
 
         {/* Contact Info */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 32 }}>
           <AnimatedSection delay={0.1}>
             <a href="mailto:support@ports.blog" style={{ textDecoration: 'none' }}>
               <motion.div whileHover={{ y: -4, scale: 1.02 }} className="glass-card" style={{ padding: 24, textAlign: 'center', cursor: 'pointer' }}>

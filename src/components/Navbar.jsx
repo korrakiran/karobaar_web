@@ -64,7 +64,7 @@ const Navbar = memo(function Navbar() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="hidden md:flex items-center gap-1" style={{ alignItems: 'center', gap: '8px' }}>
             {navLinks.map((link) => (
               <Link
                 key={link.path}

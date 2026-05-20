@@ -105,7 +105,7 @@ const About = memo(function About() {
           <h2 className="section-title">What Karobaar <span className="gradient-text">Can Do</span></h2>
           <p className="section-subtitle">A comprehensive suite of tools built into the platform you already use every day.</p>
         </AnimatedSection>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
           {capabilities.map((cap, i) => {
             const IconComp = cap.Icon
             return (

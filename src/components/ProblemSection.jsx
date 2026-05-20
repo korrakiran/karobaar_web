@@ -15,7 +15,7 @@ const ProblemSection = memo(function ProblemSection() {
         <h2 className="section-title">Retail Shouldn't Be <span className="gradient-text">This Hard</span></h2>
         <p className="section-subtitle">Millions of Indian retailers struggle with outdated tools that don't speak their language or fit their workflow.</p>
       </AnimatedSection>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
         {problems.map((p, i) => {
           const IconComp = p.Icon
           return (

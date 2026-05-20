@@ -135,8 +135,8 @@ const HeroSection = memo(function HeroSection() {
                 onClick={() => setShowVideoModal(false)}
                 style={{
                   position: 'absolute',
-                  top: -16,
-                  right: -16,
+                  top: 12,
+                  right: 12,
                   width: 38,
                   height: 38,
                   borderRadius: '50%',

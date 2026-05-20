@@ -18,7 +18,7 @@ const FeaturesGrid = memo(function FeaturesGrid() {
         <h2 className="section-title">Everything Your Store <span className="gradient-text">Needs</span></h2>
         <p className="section-subtitle">A complete retail operating system that works entirely through WhatsApp.</p>
       </AnimatedSection>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
         {features.map((f, i) => {
           const IconComp = f.Icon
           return (

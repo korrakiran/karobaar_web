@@ -36,9 +36,8 @@ const Navbar = memo(function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="fixed top-4 left-1/2 z-50"
+        className="fixed top-4 left-0 right-0 mx-auto z-50"
         style={{
-          transform: 'translateX(-50%)',
           width: 'min(92%, 1100px)',
         }}
       >

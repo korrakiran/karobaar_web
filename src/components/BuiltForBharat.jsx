@@ -25,7 +25,7 @@ const BuiltForBharat = memo(function BuiltForBharat() {
         </AnimatedSection>
       </div>
 
-      <div style={{ position: 'relative', width: '100%', overflow: 'hidden', paddingBottom: 80 }}>
+      <div style={{ position: 'relative', width: '100%', overflow: 'hidden', paddingBottom: 60 }}>
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
           transition={{
@@ -36,8 +36,8 @@ const BuiltForBharat = memo(function BuiltForBharat() {
           style={{
             display: 'flex',
             width: 'max-content',
-            gap: 32, // Increased gap to increase the width and spread of the items
-            padding: '0 32px', // Added horizontal padding for further width spread
+            gap: 32,
+            padding: '24px 32px', // Vertical padding provides breathing room so top path/shadows are not cut off
           }}
         >
           {marqueeItems.map((lang, i) => (

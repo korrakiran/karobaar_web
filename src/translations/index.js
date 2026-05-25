@@ -57,7 +57,7 @@ export const translations = {
       title: "Ready to Transform Your ",
       highlight: "Karobaar?",
       subtitle: "Experience India's first WhatsApp-native operating system built specifically for small retailers.",
-      btn: "Get in Touch",
+      btn: "Contact Us",
       h1: "WhatsApp Native",
       h2: "Instant Setup",
       h3: "Local Languages",

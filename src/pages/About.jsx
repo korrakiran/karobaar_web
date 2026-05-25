@@ -183,7 +183,7 @@ const About = memo(function About() {
               Join us in building the future of Indian commerce.
             </p>
             <Link to="/contact" className="btn-glow">
-              Get in Touch <ArrowRight size={20} />
+              Contact Us <ArrowRight size={20} />
             </Link>
           </AnimatedSection>
         </div>

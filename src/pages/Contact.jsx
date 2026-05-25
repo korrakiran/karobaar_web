@@ -53,34 +53,27 @@ const Contact = memo(function Contact() {
   })
 
   return (
-    <main style={{ paddingTop: 120 }}>
-      <section className="section" style={{ textAlign: 'center', paddingBottom: 40 }}>
-        <AnimatedSection>
-          <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 16 }}>
-            Get In <span className="gradient-text">Touch</span>
-          </h1>
-          <p style={{ color: '#6B7280', fontSize: '1.15rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>
-            Have a question or a partnership idea? We'd love to hear from you.
-          </p>
-        </AnimatedSection>
-      </section>
+    <div style={{ paddingTop: 80 }} id="contact-section">
+    <div style={{ background: '#f8fafc', padding: '80px 24px' }}>
+      <AnimatedSection>
+        <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <h1 className="section-title">{t('contact.title')}</h1>
+          <p className="section-subtitle">{t('contact.subtitle')}</p>
+        </div>
+      </AnimatedSection>
 
-      <section style={{ maxWidth: 600, margin: '0 auto', padding: '0 24px 80px' }}>
-        <AnimatedSection>
-          <AnimatePresence mode="wait">
-            {submitted ? (
-              <motion.div key="success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="glass-card" style={{ padding: 48, textAlign: 'center' }}>
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}>
-                  <CheckCircle size={56} style={{ color: '#00C16A', margin: '0 auto 20px' }} />
-                </motion.div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.5rem', fontWeight: 700, marginBottom: 12 }}>Message Sent!</h3>
-                <p style={{ color: '#6B7280', lineHeight: 1.7 }}>Thank you for reaching out. We'll get back to you within 24 hours.</p>
-                <button onClick={() => setSubmitted(false)} className="btn-secondary" style={{ marginTop: 24 }}>Send Another</button>
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+        <AnimatedSection delay={0.2}>
+          <motion.div 
+            className="glass-card" 
+            style={{ padding: '40px', background: 'white', borderRadius: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}
+          >
+            {status === 'success' ? (
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '40px 0' }}>
+                <CheckCircle2 size={64} style={{ color: '#00C16A', margin: '0 auto 24px' }} />
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>{t('contact.success')}</h3>
               </motion.div>
             ) : (
-              <motion.form key="form" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="glass-card" style={{ padding: 'clamp(28px, 4vw, 48px)' }}>
-                <div style={{ marginBottom: 20 }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>Name</label>
                   <input
                     type="text" placeholder="Your name" value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -142,7 +135,7 @@ const Contact = memo(function Contact() {
           </AnimatedSection>
         </div>
       </section>
-    </main>
+    </div>
   )
 })
 

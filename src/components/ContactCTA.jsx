@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, MessageCircle, Zap, Globe, BarChart3 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
-
-const highlights = [
-  { Icon: MessageCircle, title: 'WhatsApp Native' },
-  { Icon: Zap, title: 'Instant Setup' },
-  { Icon: Globe, title: 'Local Languages' },
-  { Icon: BarChart3, title: 'Smart Analytics' },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 const ContactCTA = memo(function ContactCTA() {
+  const { t } = useLanguage()
+
+  const highlights = [
+    { Icon: MessageCircle, title: t('contactCTA.h1') },
+    { Icon: Zap, title: t('contactCTA.h2') },
+    { Icon: Globe, title: t('contactCTA.h3') },
+    { Icon: BarChart3, title: t('contactCTA.h4') },
+  ]
+
   return (
     <section style={{ background: '#0F172A', position: 'relative', overflow: 'hidden' }}>
       {/* Background glow */}
@@ -19,10 +22,10 @@ const ContactCTA = memo(function ContactCTA() {
       <div className="section" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
         <AnimatedSection>
           <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, color: 'white', letterSpacing: '-0.04em', marginBottom: 16 }}>
-            Ready to Transform Your <span className="gradient-text">Karobaar</span>?
+            {t('contactCTA.title')}<span className="gradient-text">{t('contactCTA.highlight')}</span>
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '1.15rem', maxWidth: 560, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Experience India's first WhatsApp-native operating system built specifically for small retailers.
+            {t('contactCTA.subtitle')}
           </p>
         </AnimatedSection>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16, marginBottom: 48 }}>
@@ -39,8 +42,8 @@ const ContactCTA = memo(function ContactCTA() {
           })}
         </div>
         <AnimatedSection delay={0.4}>
-          <Link to="/contact" className="btn-glow" style={{ fontSize: '1.1rem' }}>
-            Get in Touch <ArrowRight size={20} />
+          <Link to="/contact" className="btn-glow" style={{ fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+            {t('contactCTA.btn')} <ArrowRight size={20} />
           </Link>
         </AnimatedSection>
       </div>

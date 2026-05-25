@@ -1,19 +1,32 @@
 import { useState, useEffect, memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { Menu, X, ArrowRight, Globe } from 'lucide-react'
 import Logo from './Logo'
+import { useLanguage } from '../context/LanguageContext'
 
-const navLinks = [
-  { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
-  { path: '/demo', label: 'Demo' },
+const navKeys = [
+  { path: '/', key: 'nav.home' },
+  { path: '/about', key: 'nav.about' },
+  { path: '/demo', key: 'nav.demo' },
 ]
 
 const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const { language, toggleLanguage, t } = useLanguage()
+  
+  const { scrollY } = useScroll()
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious()
+    if (latest > previous && latest > 150) {
+      setHidden(true)
+    } else {
+      setHidden(false)
+    }
+  })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
@@ -34,8 +47,8 @@ const Navbar = memo(function Navbar() {
     <>
       <motion.nav
         initial={{ y: -100, x: '-50%', opacity: 0 }}
-        animate={{ y: 0, x: '-50%', opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        animate={{ y: hidden ? -100 : 0, x: '-50%', opacity: hidden ? 0 : 1 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="fixed top-4 left-1/2 z-50"
         style={{
           width: 'min(92%, 1100px)',
@@ -64,7 +77,7 @@ const Navbar = memo(function Navbar() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-1" style={{ alignItems: 'center', gap: '8px' }}>
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -86,7 +99,7 @@ const Navbar = memo(function Navbar() {
                   }
                 }}
               >
-                {link.label}
+                {t(link.key)}
                 {location.pathname === link.path && (
                   <motion.div
                     layoutId="navIndicator"
@@ -105,13 +118,21 @@ const Navbar = memo(function Navbar() {
 
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-4">
+              <button 
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                <Globe size={16} />
+                {language.toUpperCase()}
+              </button>
               <Link
                 to="/contact"
                 className="btn-primary"
-                style={{ padding: '10px 24px', fontSize: '0.875rem' }}
+                style={{ padding: '10px 24px', fontSize: '0.875rem', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'none' }}
               >
-                Contact Us <ArrowRight size={16} />
+                {t('nav.contact')} <ArrowRight size={16} />
               </Link>
             </div>
             <button
@@ -147,7 +168,16 @@ const Navbar = memo(function Navbar() {
             }}
           >
             <div className="flex flex-col items-center gap-8">
-              {navLinks.map((link, i) => (
+              <button 
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 text-lg font-bold text-gray-600 hover:text-gray-900 transition-colors bg-gray-100 rounded-full px-6 py-2"
+                style={{ border: 'none', cursor: 'pointer' }}
+              >
+                <Globe size={20} />
+                {language === 'en' ? 'Switch to Hindi' : 'Switch to English'}
+              </button>
+
+              {navKeys.map((link, i) => (
                 <motion.div
                   key={link.path}
                   initial={{ opacity: 0, y: 20 }}
@@ -157,6 +187,7 @@ const Navbar = memo(function Navbar() {
                 >
                   <Link
                     to={link.path}
+                    onClick={() => setMenuOpen(false)}
                     className="text-3xl font-bold no-underline"
                     style={{
                       fontFamily: "'Outfit', sans-serif",
@@ -164,7 +195,7 @@ const Navbar = memo(function Navbar() {
                       letterSpacing: '-0.02em',
                     }}
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </motion.div>
               ))}
@@ -173,8 +204,8 @@ const Navbar = memo(function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <Link to="/contact" className="btn-primary" style={{ marginTop: 16 }}>
-                  Contact Us <ArrowRight size={18} />
+                <Link to="/contact" className="btn-primary" style={{ marginTop: 16, display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>
+                  {t('nav.contact')} <ArrowRight size={18} />
                 </Link>
               </motion.div>
             </div>

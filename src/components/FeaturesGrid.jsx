@@ -1,34 +1,62 @@
 import { memo } from 'react'
-import { Package, Receipt, BarChart3, Globe, Users, Brain } from 'lucide-react'
+import { PackageSearch, Zap, BookOpen, Users, LineChart, Globe2 } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
-
-const features = [
-  { Icon: Package, title: 'Inventory Management', desc: 'Track stock in real-time via WhatsApp.', large: true },
-  { Icon: Receipt, title: 'Smart Billing', desc: 'Generate professional invoices instantly.', large: false },
-  { Icon: BarChart3, title: 'Sales Analytics', desc: 'Daily insights, trends, and forecasts.', large: false },
-  { Icon: Globe, title: 'Multilingual Support', desc: '20+ Indian languages supported natively.', large: false },
-  { Icon: Users, title: 'Customer Tracking', desc: 'Build customer profiles automatically.', large: false },
-  { Icon: Brain, title: 'AI Insights', desc: 'Smart suggestions to grow your business.', large: true },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 const FeaturesGrid = memo(function FeaturesGrid() {
+  const { t } = useLanguage()
+
+  const features = [
+    { icon: PackageSearch, title: t('features.f1.title'), desc: t('features.f1.desc'), color: '#3B82F6' },
+    { icon: Zap, title: t('features.f2.title'), desc: t('features.f2.desc'), color: '#EAB308' },
+    { icon: BookOpen, title: t('features.f3.title'), desc: t('features.f3.desc'), color: '#10B981' },
+    { icon: Users, title: t('features.f4.title'), desc: t('features.f4.desc'), color: '#F43F5E' },
+    { icon: LineChart, title: t('features.f5.title'), desc: t('features.f5.desc'), color: '#8B5CF6' },
+    { icon: Globe2, title: t('features.f6.title'), desc: t('features.f6.desc'), color: '#06B6D4' },
+  ]
+
   return (
-    <section className="section">
-      <AnimatedSection>
-        <h2 className="section-title">Everything Your Store <span className="gradient-text">Needs</span></h2>
-        <p className="section-subtitle">A complete retail operating system that works entirely through WhatsApp.</p>
-      </AnimatedSection>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {features.map((f, i) => {
-          const IconComp = f.Icon
+    <section className="section" style={{ background: '#F8FAFC' }}>
+      <div style={{ textAlign: 'center', marginBottom: 60 }}>
+        <AnimatedSection>
+          <h2 className="section-title">{t('features.title')}</h2>
+          <p className="section-subtitle">{t('features.subtitle')}</p>
+        </AnimatedSection>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {features.map((feature, i) => {
+          const IconComp = feature.icon
           return (
-            <AnimatedSection key={i} delay={i * 0.08}>
-              <div className="glass-card" style={{ padding: f.large ? '48px 36px' : '36px 28px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ width: 52, height: 52, borderRadius: 16, background: 'linear-gradient(135deg, rgba(0,193,106,0.1), rgba(79,70,229,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                  <IconComp size={26} style={{ color: '#00C16A' }} />
+            <AnimatedSection key={i} delay={i * 0.1}>
+              <div 
+                className="glass-card"
+                style={{ 
+                  padding: '32px', 
+                  background: 'white',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s ease',
+                  border: '1px solid rgba(0,0,0,0.05)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.02)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.06)'
+                  e.currentTarget.style.borderColor = 'rgba(0,193,106,0.2)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.02)'
+                  e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
+                }}
+              >
+                <div style={{ width: 50, height: 50, borderRadius: 14, background: `${feature.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                  <IconComp size={24} style={{ color: feature.color }} />
                 </div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: f.large ? '1.4rem' : '1.15rem', fontWeight: 700, marginBottom: 8, letterSpacing: '-0.02em' }}>{f.title}</h3>
-                <p style={{ color: '#6B7280', fontSize: '0.9rem', lineHeight: 1.6 }}>{f.desc}</p>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 12, fontFamily: "'Outfit', sans-serif", color: '#111827' }}>{feature.title}</h3>
+                <p style={{ color: '#64748B', lineHeight: 1.6, fontSize: '0.95rem', flex: 1 }}>{feature.desc}</p>
               </div>
             </AnimatedSection>
           )

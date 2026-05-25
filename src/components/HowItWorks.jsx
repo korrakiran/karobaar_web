@@ -1,39 +1,44 @@
 import { memo } from 'react'
-import { MessageSquare, Package, Receipt, BarChart3 } from 'lucide-react'
+import { MessageSquare, Settings2, TrendingUp } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
-
-const steps = [
-  { Icon: MessageSquare, num: '01', title: 'Message on WhatsApp', desc: 'Just send a message to your Karobaar bot — no new app needed.' },
-  { Icon: Package, num: '02', title: 'Track Inventory', desc: 'Add, update, or check stock with simple text commands.' },
-  { Icon: Receipt, num: '03', title: 'Generate Bills', desc: 'Create professional invoices and share them instantly.' },
-  { Icon: BarChart3, num: '04', title: 'Get Business Insights', desc: 'Daily summaries, trends, and smart suggestions powered by AI.' },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 const HowItWorks = memo(function HowItWorks() {
+  const { t } = useLanguage()
+
+  const steps = [
+    { icon: MessageSquare, title: t('howItWorks.s1.title'), desc: t('howItWorks.s1.desc'), color: '#25D366' },
+    { icon: Settings2, title: t('howItWorks.s2.title'), desc: t('howItWorks.s2.desc'), color: '#3B82F6' },
+    { icon: TrendingUp, title: t('howItWorks.s3.title'), desc: t('howItWorks.s3.desc'), color: '#8B5CF6' },
+  ]
+
   return (
-    <section style={{ background: '#f8fafc' }}>
-      <div className="section">
-        <AnimatedSection>
-          <h2 className="section-title">How <span className="gradient-text">Karobaar</span> Works</h2>
-          <p className="section-subtitle">Four simple steps to transform your retail business — all through WhatsApp.</p>
-        </AnimatedSection>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 32, position: 'relative' }}>
-          {steps.map((step, i) => {
-            const IconComp = step.Icon
-            return (
-              <AnimatedSection key={i} delay={i * 0.12}>
-                <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                  <div style={{ width: 72, height: 72, borderRadius: 20, background: 'linear-gradient(135deg, rgba(0,193,106,0.1), rgba(6,182,212,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', border: '2px solid rgba(0,193,106,0.15)' }}>
-                    <IconComp size={32} style={{ color: '#00C16A' }} />
-                  </div>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#00C16A', marginBottom: 8, letterSpacing: '0.1em' }}>STEP {step.num}</div>
-                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.2rem', fontWeight: 700, marginBottom: 8, letterSpacing: '-0.02em' }}>{step.title}</h3>
-                  <p style={{ color: '#6B7280', fontSize: '0.9rem', lineHeight: 1.6 }}>{step.desc}</p>
-                </div>
-              </AnimatedSection>
-            )
-          })}
+    <section className="section" style={{ background: '#0F172A', color: 'white', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', height: 400, background: 'radial-gradient(ellipse at top, rgba(0,193,106,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      
+      <AnimatedSection>
+        <div style={{ textAlign: 'center', marginBottom: 64, position: 'relative', zIndex: 1 }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, marginBottom: 16 }}>{t('howItWorks.title')}</h2>
+          <p style={{ color: '#94A3B8', fontSize: '1.1rem', maxWidth: 500, margin: '0 auto' }}>{t('howItWorks.subtitle')}</p>
         </div>
+      </AnimatedSection>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 32, position: 'relative', zIndex: 1 }}>
+        {steps.map((step, i) => {
+          return (
+            <AnimatedSection key={i} delay={i * 0.15}>
+              <div style={{ position: 'relative', padding: 32, background: 'rgba(255,255,255,0.03)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ position: 'absolute', top: -20, left: 32, width: 48, height: 48, borderRadius: 14, background: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 24px ${step.color}40`, color: 'white' }}>
+                  <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: '1.2rem' }}>{i + 1}</span>
+                </div>
+                <div style={{ marginTop: 24 }}>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>{step.title}</h3>
+                  <p style={{ color: '#94A3B8', lineHeight: 1.6, fontSize: '0.95rem' }}>{step.desc}</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          )
+        })}
       </div>
     </section>
   )

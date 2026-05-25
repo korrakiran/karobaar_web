@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import HeroSection from '../components/HeroSection'
 import ProblemSection from '../components/ProblemSection'
-import HowItWorks from '../components/HowItWorks'
 import FeaturesGrid from '../components/FeaturesGrid'
 import BuiltForBharat from '../components/BuiltForBharat'
 import ImpactSection from '../components/ImpactSection'
@@ -12,7 +11,6 @@ const Home = memo(function Home() {
     <main>
       <HeroSection />
       <ProblemSection />
-      <HowItWorks />
       <FeaturesGrid />
       <BuiltForBharat />
       <ImpactSection />

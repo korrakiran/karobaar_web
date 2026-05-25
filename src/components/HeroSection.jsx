@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Play, Globe, Clock, Zap, MessageCircle, X } from 'lucide-react'
+import { ArrowRight, Play, MessageCircle, X } from 'lucide-react'
 
 import WhatsAppMockup from './WhatsAppMockup'
 import { useLanguage } from '../context/LanguageContext'

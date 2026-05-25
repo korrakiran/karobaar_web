@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
-import { ExternalLink } from 'lucide-react'
 import Logo from './Logo'
 
 const Footer = memo(function Footer() {

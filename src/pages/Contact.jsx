@@ -2,8 +2,10 @@ import { memo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, MessageCircle, Send, CheckCircle } from 'lucide-react'
 import AnimatedSection from '../components/AnimatedSection'
+import { useLanguage } from '../context/LanguageContext'
 
 const Contact = memo(function Contact() {
+  const { t } = useLanguage()
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
@@ -54,64 +56,82 @@ const Contact = memo(function Contact() {
 
   return (
     <div style={{ paddingTop: 80 }} id="contact-section">
-    <div style={{ background: '#f8fafc', padding: '80px 24px' }}>
-      <AnimatedSection>
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <h1 className="section-title">{t('contact.title')}</h1>
-          <p className="section-subtitle">{t('contact.subtitle')}</p>
-        </div>
-      </AnimatedSection>
-
-      <div style={{ maxWidth: 600, margin: '0 auto' }}>
-        <AnimatedSection delay={0.2}>
-          <motion.div 
-            className="glass-card" 
-            style={{ padding: '40px', background: 'white', borderRadius: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}
-          >
-            {status === 'success' ? (
-              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '40px 0' }}>
-                <CheckCircle2 size={64} style={{ color: '#00C16A', margin: '0 auto 24px' }} />
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>{t('contact.success')}</h3>
-              </motion.div>
-            ) : (
-                  <input
-                    type="text" placeholder="Your name" value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
-                    onBlur={(e) => { e.target.style.borderColor = errors.name ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
-                    style={inputStyle(errors.name)}
-                  />
-                  {errors.name && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.name}</span>}
-                </div>
-                <div style={{ marginBottom: 20 }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>Email</label>
-                  <input
-                    type="email" placeholder="you@example.com" value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
-                    onBlur={(e) => { e.target.style.borderColor = errors.email ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
-                    style={inputStyle(errors.email)}
-                  />
-                  {errors.email && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.email}</span>}
-                </div>
-                <div style={{ marginBottom: 28 }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>Message</label>
-                  <textarea
-                    placeholder="Tell us what you're thinking..." rows={5} value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
-                    onBlur={(e) => { e.target.style.borderColor = errors.message ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
-                    style={{ ...inputStyle(errors.message), resize: 'vertical', minHeight: 120 }}
-                  />
-                  {errors.message && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.message}</span>}
-                </div>
-                <button type="submit" className="btn-primary" disabled={loading} style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', padding: '16px 32px', opacity: loading ? 0.7 : 1 }}>
-                  {loading ? 'Sending...' : <><Send size={18} /> Send Message</>}
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
+      <div style={{ background: '#f8fafc', padding: '80px 24px' }}>
+        <AnimatedSection>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <h1 className="section-title">{t('contact.title')}</h1>
+            <p className="section-subtitle">{t('contact.subtitle')}</p>
+          </div>
         </AnimatedSection>
+
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <AnimatedSection delay={0.2}>
+            <motion.div 
+              className="glass-card" 
+              style={{ padding: '40px', background: 'white', borderRadius: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}
+            >
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    style={{ textAlign: 'center', padding: '40px 0' }}
+                  >
+                    <CheckCircle size={64} style={{ color: '#00C16A', margin: '0 auto 24px' }} />
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>{t('contact.success')}</h3>
+                  </motion.div>
+                ) : (
+                  <motion.form 
+                    key="form"
+                    onSubmit={handleSubmit}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <div style={{ marginBottom: 20 }}>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>{t('contact.name')}</label>
+                      <input
+                        type="text" placeholder={t('contact.name')} value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
+                        onBlur={(e) => { e.target.style.borderColor = errors.name ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
+                        style={inputStyle(errors.name)}
+                      />
+                      {errors.name && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.name}</span>}
+                    </div>
+                    <div style={{ marginBottom: 20 }}>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>{t('contact.email')}</label>
+                      <input
+                        type="email" placeholder={t('contact.email')} value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
+                        onBlur={(e) => { e.target.style.borderColor = errors.email ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
+                        style={inputStyle(errors.email)}
+                      />
+                      {errors.email && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.email}</span>}
+                    </div>
+                    <div style={{ marginBottom: 28 }}>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 8, color: '#374151' }}>{t('contact.message')}</label>
+                      <textarea
+                        placeholder={t('contact.message')} rows={5} value={form.message}
+                        onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        onFocus={(e) => { e.target.style.borderColor = '#00C16A'; e.target.style.boxShadow = '0 0 0 3px rgba(0,193,106,0.1)' }}
+                        onBlur={(e) => { e.target.style.borderColor = errors.message ? '#ef4444' : 'rgba(0,0,0,0.08)'; e.target.style.boxShadow = 'none' }}
+                        style={{ ...inputStyle(errors.message), resize: 'vertical', minHeight: 120 }}
+                      />
+                      {errors.message && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: 4, display: 'block' }}>{errors.message}</span>}
+                    </div>
+                    <button type="submit" className="btn-primary" disabled={loading} style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', padding: '16px 32px', opacity: loading ? 0.7 : 1 }}>
+                      {loading ? 'Sending...' : <><Send size={18} /> {t('contact.send')}</>}
+                    </button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </AnimatedSection>
+        </div>
 
         {/* Contact Info */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 32 }}>
@@ -134,7 +154,7 @@ const Contact = memo(function Contact() {
             </a>
           </AnimatedSection>
         </div>
-      </section>
+      </div>
     </div>
   )
 })

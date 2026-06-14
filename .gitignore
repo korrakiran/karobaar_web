@@ -26,3 +26,25 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Unimem Local Project Memory
+.unimem/
+
+# Agent & AI Editor Rules / Instructions
+.aider.instructions.md
+.aiderules
+.antigravityrules
+.clauderules
+.clinerules
+.codeiumrules
+.continuerules
+.cursorrules
+.doublerules
+.geminirules
+.phindrules
+.supermavenrules
+.tabninerules
+.windsurfrules
+AGENTS.md
+CLAUDE.md
+

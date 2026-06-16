@@ -56,7 +56,7 @@ const team = [
   },
   {
     name: 'Md. Mubashir Ahmed',
-    role: 'Head of Growth',
+    role: 'CTO',
     bio: 'Experienced in AI/ML solutions and community outreach, focused on scaling tech platforms for local merchants.',
     image: mubashirImg,
     linkedin: 'https://www.linkedin.com/in/md-mubashir-ahmed-00511728b/',

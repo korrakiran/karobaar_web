@@ -40,7 +40,7 @@ const capabilities = [
 const team = [
   {
     name: 'Korra Kiran',
-    role: 'Co-Founder & CEO',
+    role: 'Co-Founder & CFO',
     bio: 'Passionate about leveraging machine learning and conversational AI to solve real-world problems and digitalize retail.',
     image: kiranImg,
     linkedin: 'https://www.linkedin.com/in/korra-kiran-482998286/',
@@ -48,7 +48,7 @@ const team = [
   },
   {
     name: 'Abdullah Aarif Shaikh',
-    role: 'Founder & CFO',
+    role: 'Co-Founder & CEO',
     bio: 'Curious coder and optimist focused on building optimized technological and financial systems for commerce.',
     image: abdullahImg,
     linkedin: 'https://www.linkedin.com/in/abdullah-aarif-shaikh-0b248b227/',
